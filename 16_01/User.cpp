@@ -15,6 +15,8 @@ struct data {
 
 class User {
  private:
+    static int count_user;
+    static int sumForAllUsers;
     int id;
     std::string name;
     data user_data;
@@ -23,15 +25,21 @@ class User {
  public:
     User() : User("Ivan", data()){}
 
-    User(const User &other) {}
+    User(const User &other)
+        : User(other.name, other.user_data) {
+            this->id = other.id;
+            this->sum = other.sum;
+    }
 
     User(std::string name, data new_data) {
-        this->id = 0;
+        this->id = count_user + 1;
         this->sum = 0;
         this->name = name;
         this->user_data.day = new_data.day;
         this->user_data.month = new_data.month;
         this->user_data.year = new_data.year;
+
+        count_user += 1;
     }
 
     void printUserData() {
@@ -42,12 +50,28 @@ class User {
                 << "." << this->user_data.year << "\n";
         std::cout << "Sum : " << this->sum << "\n";
     }
+
+    static void printCountUser() {
+        std::cout << count_user << "\n";
+    }
 };
 
+int User::count_user { 0 };
+int User::sumForAllUsers { 0 };
 
 
+int main() {
+    User Steve("Steve", data(1997, 04, 21));
+    User Defoult;
+    User CopySteve(Steve);
 
-int main(int argc, char const *argv[]) {
+    Steve.printUserData();
+    std::cout << "\n";
+    CopySteve.printUserData();
+    std::cout << "\n";
+    Defoult.printUserData();
 
+    std::cout << "\n";
+    User::printCountUser();
     return 0;
 }
