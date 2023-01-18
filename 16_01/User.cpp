@@ -42,7 +42,7 @@ class User {
         count_user += 1;
     }
 
-    void printUserData() {
+    void printUserData() const {
         std::cout << "Id : " << this->id << "\n";
         std::cout << "Name : " << this->name << "\n";
         std::cout << "Data : " << this->user_data.day
@@ -51,9 +51,20 @@ class User {
         std::cout << "Sum : " << this->sum << "\n";
     }
 
+    void addSum(int sum) {
+        this->sum = this->sum + sum;
+        sumForAllUsers = sumForAllUsers + sum;
+    }
+
+
+    static void printSumForAllUsers() {
+        std::cout << sumForAllUsers << "\n";
+    }
     static void printCountUser() {
         std::cout << count_user << "\n";
     }
+
+
 };
 
 int User::count_user { 0 };
@@ -65,6 +76,9 @@ int main() {
     User Defoult;
     User CopySteve(Steve);
 
+    Steve.addSum(300);
+    Defoult.addSum(450);
+
     Steve.printUserData();
     std::cout << "\n";
     CopySteve.printUserData();
@@ -73,5 +87,6 @@ int main() {
 
     std::cout << "\n";
     User::printCountUser();
+    User::printSumForAllUsers();
     return 0;
 }
