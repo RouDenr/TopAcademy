@@ -1,5 +1,10 @@
 #include <iostream>
 
+class Point {
+    public:
+    int x, y;
+};
+
 class Array {
     int *arr;
     int size;
@@ -47,6 +52,29 @@ class Array {
         }
         std::cout << "]\n";
     }
+
+    Array &operator+(int val) {
+        add_back(val);
+        return *this;
+    }
+
+    bool operator<(const Array &other) {
+        return this->size < other.size;
+    }
+    bool operator>(const Array &other) {
+        return this->size > other.size;
+    }
+
+    Array &operator-(const Array &other) {
+       for (int i = 0; i < this->size && i < other.size; ++i) {
+            this->arr[i] -= other.arr[i];
+        }
+        return *this;
+    }
+
+    int &operator[](int index) {
+        return this->arr[index];
+    }
     ~Array() {
         delete [] this->arr;
     }
@@ -54,6 +82,7 @@ class Array {
 
 int main() {
     Array arr(15);
+    Array arr2(15);
 
     arr.add_back(1);
     arr.add_back(2);
@@ -70,6 +99,23 @@ int main() {
     arr.print();
     arr.erase(1);
     arr.print();
+
+    arr + 7 + 8;
+    arr.print();
+
+    arr2 + 2 + 5;
+
+    if (arr > arr2) {
+        std::cout << "arr > arr2\n";
+    } else {
+        std::cout << "arr < arr2\n";
+    }
+
+    arr2.print();
+    arr.print();
+    arr2 - arr;
+    arr2.print();
+    std::cout << arr[0] << "\n";
     return 0;
 }
 
