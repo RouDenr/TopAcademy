@@ -4,9 +4,9 @@
 class User {
     std::string name;
     int age;
-    int *array_o;
-    int size_arr;
-    int cap; // size * 2
+    int *array_o; // массив оценок
+    int size_arr; // фактический размер масива
+    int cap; // вместимость массив (size * 2)
 
     public:
     User() {
@@ -23,7 +23,7 @@ class User {
     }
 
     void print_data() {
-        // ...
+        // высести все данные + print_avg_arr()
     }
     void print_avg_arr() {
         // вывести среднее значение arr
@@ -41,6 +41,10 @@ class User {
 
     void setName(std::string name) { this->name = name; }
     void setAge(int age) { this->age = age; }
+
+    ~User() {
+        // ...
+    }
 };
 
 
