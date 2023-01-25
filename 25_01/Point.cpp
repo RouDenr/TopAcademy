@@ -141,25 +141,30 @@ int main()
     Array<Point> array_points(points, 3);
     Array<int> array_int(arr, 5);
     std::cout << "init points" << array_points << "\n";
-    std::cout << "init int"<< array_int << "\n";
+    std::cout << "init int"<< array_int << "\n\n";
 
     array_int.add_back(7);
     array_points.add_back(Point(7, 1));
-    std::cout << array_points << "\n";
-    std::cout << array_int << "\n";
+    std::cout << "add_back(Point(7, 1))" << array_points << "\n";
+    std::cout << "add_back(7)" << array_int << "\n\n";
 
     array_int.delete_index(2);
     array_points.delete_index(2);
-    std::cout << array_points << "\n";
-    std::cout << array_int << "\n";
+    std::cout << "delete_index(2)" << array_points << "\n";
+    std::cout << "delete_index(2)" << array_int << "\n\n";
+
+    array_int.add_index(2, 1);
+    array_points.add_index(Point(2, 1), 1);
+    std::cout << "add_index(Point(2, 1), 1)" << array_points << "\n";
+    std::cout << "add_index(2, 1)" << array_int << "\n\n";
 
     array_points.plus_all(Point(1, 1));
     array_int.plus_all(1);
-    std::cout << array_points << "\n";
-    std::cout << array_int << "\n";
+    std::cout << "plus_all(Point(1,1))" << array_points << "\n";
+    std::cout << "plus_all(1)" << array_int << "\n\n";
 
     array_points.minus_all(Point(2, 0));
     array_int.minus_all(2);
-    std::cout << array_points << "\n";
-    std::cout << array_int << "\n";
+    std::cout << "minus_all(Point(2,0))" << array_points << "\n";
+    std::cout << "minus_all(2)"  << array_int << "\n\n";
 }
