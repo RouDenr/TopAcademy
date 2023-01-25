@@ -76,6 +76,28 @@ class Array {
         return this->arr[index];
     }
 
+    void add_back(T val) {
+        // добвление элемента в конец
+    }
+
+    void delete_index(int index) {
+        // удаление элемента по индексу
+    }
+
+    void add_index(T val, int index) {
+        // добавление элемента по индексу
+    }
+
+    void plus_all(T val) {
+        // прибавить ко всем элементам val
+        // {1, 2, 3, 4} plus_all(3) {4, 5, 6, 7}
+    }
+
+    void minus_all(T val) {
+        // вычесть из всех элементов val
+        // {1, 2, 3, 4} minus_all(3) {-2, -1, 0, 1}
+    }
+
     void print() {
         std::cout << "[ ";
         for (int i = 0; i < this->size; ++i) {
@@ -116,7 +138,28 @@ int main()
     Point points[3] {Point(1,2), Point(3, 6), Point(8, 56)};
     int arr[5] { 1, 2, 3, 4, 5};
 
-    Array<Point> template_array(points, 3);
+    Array<Point> array_points(points, 3);
+    Array<int> array_int(arr, 5);
+    std::cout << "init points" << array_points << "\n";
+    std::cout << "init int"<< array_int << "\n";
 
-    std::cout << template_array << "\n";
+    array_int.add_back(7);
+    array_points.add_back(Point(7, 1));
+    std::cout << array_points << "\n";
+    std::cout << array_int << "\n";
+
+    array_int.delete_index(2);
+    array_points.delete_index(2);
+    std::cout << array_points << "\n";
+    std::cout << array_int << "\n";
+
+    array_points.plus_all(Point(1, 1));
+    array_int.plus_all(1);
+    std::cout << array_points << "\n";
+    std::cout << array_int << "\n";
+
+    array_points.minus_all(Point(2, 0));
+    array_int.minus_all(2);
+    std::cout << array_points << "\n";
+    std::cout << array_int << "\n";
 }
