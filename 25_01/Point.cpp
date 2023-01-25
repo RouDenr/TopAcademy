@@ -40,11 +40,71 @@ class Point {
 
 };
 
-
     std::ostream &operator<<(std::ostream &out, const Point& point) {
         out << "[" << point.getX() << ", " << point.getY() << "]";
         return out;
     }
+
+
+template <typename T>
+class Array {
+ private:
+    T* arr;
+    int size;
+    int cap;
+ public:
+    Array() {
+        this->arr = nullptr;
+        size = 0;
+        cap = 0;
+    }
+
+    int getSize() {return this->size; }
+
+    Array(const Array &other) : Array(other.arr, other.size) {}
+
+    Array(const T* arr, int size) {
+        this->cap = size * 2;
+        this->arr = new T[this->cap];
+        this->size = size;
+        for (int i = 0; i < size; ++i) {
+            this->arr[i] = arr[i];
+        }
+    }
+
+    T &operator[](int index) {
+        return this->arr[index];
+    }
+
+    void print() {
+        std::cout << "[ ";
+        for (int i = 0; i < this->size; ++i) {
+            std::cout << this->arr[i];
+            if (i != size - 1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << " ]\n";
+    }
+
+    ~Array() {
+        delete [] this->arr;
+    }
+};
+
+    template <typename T>
+    std::ostream &operator<<(std::ostream &out, Array<T> array) {
+        out << "[ ";
+        for (int i = 0; i < array.getSize(); ++i) {
+            out << array[i];
+            if (i != array.getSize() - 1) {
+                out << ", ";
+            }
+        }
+        out << " ]";
+        return out;
+    }
+
 
 template <typename T>
 void print_any(const T &val) {
@@ -53,13 +113,10 @@ void print_any(const T &val) {
 
 int main()
 {
-    Point a(3, 5);
-    Point b(2, 1);
+    Point points[3] {Point(1,2), Point(3, 6), Point(8, 56)};
+    int arr[5] { 1, 2, 3, 4, 5};
 
-    a = a + b;
+    Array<Point> template_array(points, 3);
 
-    print_any(7);
-    print_any(25.6);
-    print_any(a);
-    return 0;
+    std::cout << template_array << "\n";
 }
