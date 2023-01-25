@@ -18,7 +18,7 @@ class User {
     User(const User &other) {
         // ...
     }
-    User(std::string name, int age, int *arr, int size) {
+    User(std::string name, int age, const int *arr, int size) {
         // ...
     }
 
@@ -82,7 +82,9 @@ class Data{
 
 int main(int argc, char const *argv[])
 {
-    Data test(3);
-    test.print();
+    int arr[3] = {1, 2, 3};
+    User test_user("Ivan", 18, arr, 3);
+
+    test_user.print_data();
     return 0;
 }
