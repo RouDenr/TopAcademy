@@ -51,6 +51,51 @@ void read_all_file(std::string name_file) {
     fin.close();
 }
 
+void set_line_in_file(std::string name_file) {
+    int n_line;
+    std::string new_line;
+    std::ifstream fin;
+
+    std::cout << "Input n line :";
+    std::cin >> n_line;
+    std::cin.ignore();
+
+    std::cout << "Input val line :";
+    std::getline(std::cin, new_line);
+
+    std::string buf;
+
+    fin.open(name_file);
+    if (fin.is_open()) {
+
+        while (fin.good()) {
+            std::string line;
+
+            if (n_line == 1) {
+                buf += new_line + "\n";
+            }
+            n_line--;
+            std::getline(fin, line);
+            buf += line + "\n";
+        }
+    } else {
+        std::cout << "File not open!!!!\n";
+    }
+    fin.close();
+
+
+    std::ofstream fout;
+
+    fout.open(name_file);
+    if (fout.is_open()) {
+        fout << buf;
+    } else {
+        std::cout << "File not open!!!!\n";
+    }
+    fout.close();
+}
+
+
 void file_hello(std::string name_file) {
     std::ifstream fin;
 
@@ -73,7 +118,8 @@ int main() {
     std::cout << "Input file name: ";
     std::cin >> file_name;
     //read_all_file(file_name);
-    write_in_file(file_name);
+    //write_in_file(file_name);
+    set_line_in_file(file_name);
     return 0;
 }
 
