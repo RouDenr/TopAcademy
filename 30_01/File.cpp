@@ -33,19 +33,6 @@ void write_in_file(std::string name_file) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void read_all_file(std::string name_file) {
     std::ifstream fin;
 
@@ -64,14 +51,10 @@ void read_all_file(std::string name_file) {
     fin.close();
 }
 
-void file_hello() {
+void file_hello(std::string name_file) {
     std::ifstream fin;
-    std::string file_name;
 
-    std::cout << "Input file name: ";
-    std::cin >> file_name;
-
-    fin.open(file_name);
+    fin.open(name_file);
 
     std::string name;
     //std::cout << "Input name: ";
