@@ -53,7 +53,7 @@ class Array {
             T* tmp_arr = this->array;
             this->array = new T[new_cap];
             this->cap = new_cap;
-
+ 
             for (int i = 0; i < this->size; ++i) {
                 this->array[i] = tmp_arr[i];
             }
