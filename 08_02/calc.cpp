@@ -41,7 +41,7 @@ class SaveCalc : public Calc { // сохраняет последнюю опер
 
     private:
     std::string last_operation; // последняя выполненая операция
-
+    // "5 + 9 = 14"
     public:
     std::string getLastOperation() {
         return this->last_operation;
@@ -58,7 +58,8 @@ int main() {
     Calc def_calc;
     SuperCalc super_calc;
     SaveCalc save_calc;
-
+    std::string str = std::to_string(4) + "+" + std::to_string(7);
+    // str = "4+7"
     def_calc.minus(100, 50);
     def_calc.plus(5, 7);
 
