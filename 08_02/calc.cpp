@@ -60,7 +60,7 @@ int main() {
     SaveCalc save_calc;
     std::string str = std::to_string(4) + "+" + std::to_string(7);
     // str = "4+7"
-    def_calc.minus(100, 50);
+    def_calc.minus(100, 50); 
     def_calc.plus(5, 7);
 
     super_calc.minus(10, 8);
