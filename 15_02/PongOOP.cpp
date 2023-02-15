@@ -71,15 +71,21 @@ class Ball {
         this->x = x;
         this->y = y;
         this->dir_x = -1;
+        this->dir_y = 1;
     }
 
     void move(const Rocket &pl_1, const Rocket &pl_2, int w, int h) {
         x += dir_x;
+        y += dir_y;
 
-        if (pl_1.is_player(x, y)) {
+        if (pl_1.is_player(x + 1, y)) {
             dir_x = -dir_x;
-        } else if (pl_2.is_player(x, y)) {
+            dir_y = -dir_y;
+        } else if (pl_2.is_player(x - 1, y)) {
             dir_x = -dir_x;
+            dir_y = -dir_y;
+        } else if (y < 2 || y > h - 2) {
+            dir_y = -dir_y;
         } else if (x <= 0 || x >= w) {
             x = w / 2;
             y = h / 2;
@@ -148,6 +154,13 @@ class Pole {
     }
 
     void work() {
+        if (pl_2.getY() < ball.getY() && pl_2.getY() < h - 2) {
+            pl_2.Down();
+        }
+        if (pl_2.getY() > ball.getY() && pl_2.getY() > 2) {
+            pl_2.Up();
+        }
+
         ball.move(pl_1, pl_2, w, h);
     }
 
@@ -164,7 +177,7 @@ int main() {
     while (!pole.end()) {
         pole.print();
 
-        usleep(75000);
+        usleep(500000);
 
         if (kbhit() != 0) {
             pole.input();
