@@ -1,15 +1,15 @@
-#include <iostream>
+#include <stdio.h>
 
 const int x = 41;
 const int y = 11;
 
-bool is_player(int x, int y, int pl_x, int pl_y) {
+int is_player(int x, int y, int pl_x, int pl_y) {
     if (x == pl_x) {
         if (y == pl_y || y == pl_y + 1 || y == pl_y - 1) {
-            return true;
+            return 1;
         }
     }
-    return false;
+    return 0;
 }
 
 void print_pole(int x, int y,
@@ -21,36 +21,42 @@ void print_pole(int x, int y,
 
         for (int j = 0; j <= x; ++j) {
             if (i == 0 || i == y) {
-                std::cout << "*";
+                // std::cout << "*";
+                printf("*");
             } else if (j == 0 || j == x) {
-                std::cout << "*";
+                printf("*");
             } else if (is_player(j, i, pl_x, pl_y)) {
-                std::cout << "|";
+                printf("|");
+                // std::cout << "|";
             } else if (is_player(j, i, pl_2_x, pl_2_y)) {
-                std::cout << "|";
+                printf("|");
+                // std::cout << "|";
             } else if (i == b_y && j == b_x) {
-                std::cout << "@";
+                printf("@");
+                // std::cout << "@";
             } else {
-                std::cout << " ";
+                printf(" ");
+                // std::cout << " ";
             }
         }
-        std::cout << "\n";
+        printf("\n");
+        // std::cout << "\n";
     }
 }
 
-void move_ball(int &b_x, int &b_y,
+void move_ball(int *b_x, int *b_y,
                 int pl_x, int pl_y,
                 int pl_2_x, int pl_2_y,
-                int &dir_x) {
-    b_x += dir_x;
+                int *dir_x) {
+    *b_x += *dir_x;
 
-    if (is_player(b_x, b_y, pl_x + 1, pl_y)) {
-        dir_x = -dir_x;
-    } else if (is_player(b_x, b_y, pl_2_x - 1, pl_2_y)) {
-        dir_x = -dir_x;
+    if (is_player(*b_x, *b_y, pl_x + 1, pl_y)) {
+        *dir_x = -*dir_x;
+    } else if (is_player(*b_x, *b_y, pl_2_x - 1, pl_2_y)) {
+        *dir_x = -*dir_x;
     } else if (b_x <= 0 || b_x >= x ) {
-        b_x = x / 2;
-        b_y = y / 2;
+        *b_x = x / 2;
+        *b_y = y / 2;
     }
 
 }
@@ -68,9 +74,8 @@ int main() {
     int b_y = y / 2;
 
     int dir_x = -1;
-    int dir_y = -1;
 
-    bool end = false;
+    int end = 0;
 
     while (!end) {
 
@@ -86,10 +91,10 @@ int main() {
             if (pl_y < y - 2)
                 pl_y++;
         } else if (in == 'q') {
-            end = true;
+            end = 1;
         }
 
-        move_ball(b_x, b_y, pl_x, pl_y, pl_2_x, pl_2_y, dir_x);
+        move_ball(&b_x, &b_y, pl_x, pl_y, pl_2_x, pl_2_y, &dir_x);
 
         system("clear");
     }
