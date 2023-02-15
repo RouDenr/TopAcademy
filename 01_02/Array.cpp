@@ -1,5 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <list>
+#include <set>
+#include <map>
 
 template <typename T>
 class Array {
@@ -53,7 +57,7 @@ class Array {
             T* tmp_arr = this->array;
             this->array = new T[new_cap];
             this->cap = new_cap;
- 
+
             for (int i = 0; i < this->size; ++i) {
                 this->array[i] = tmp_arr[i];
             }
@@ -73,13 +77,24 @@ class Array {
 };
 
 
-void print_vector(const std::vector<int> &array) {
-    std::vector<int>::const_iterator i;
-    std::vector<int>::const_iterator end = array.end();
+template <typename array>
+void print_arr(array &arr) {
+    for (int i = 0; i < arr.getSize(); ++i) {
+        std::cout << arr[i] << " ";
+    }
+
+}
+
+template< typename cont>
+void print_vector(const cont &array) {
+    typename cont::const_iterator i;
+    typename cont::const_iterator end = array.end();
 
     std::cout << "Size array " << array.size() << "\n";
-    std::cout << "Capacity array " << array.capacity() << "\n";
-    for (i = array.begin(); i != end; i++) {
+    //std::cout << "Capacity array " << array.capacity() << "\n";
+    for (i = array.begin();
+        i != end;
+        i++) {
         std::cout << *i << " ";
     }
     std::cout << "\n";
@@ -87,21 +102,50 @@ void print_vector(const std::vector<int> &array) {
 
 int main() {
 
-    int pointer_array[5] {1,2,3,4,5};
+    // int pointer_array[5] {1,2,3,4,5};
     // std::vector<int> array(&(pointer_array[0]), &(pointer_array[5]));
     // print_vector(array);
     // array.push_back(6);
     // print_vector(array);
 
-    Array<int> my_array(&(pointer_array[0]), &(pointer_array[5]));
-    for (int i = 0; i < my_array.getSize(); ++i) {
-        std::cout << my_array[i] << " ";
-    }
-    std::cout << "\n";
-    my_array.add_end(6);
-    for (int i = 0; i < my_array.getSize(); ++i) {
-        std::cout << my_array[i] << " ";
-    }
+    // Array<int> my_array(&(pointer_array[0]), &(pointer_array[5]));
+    // for (int i = 0; i < my_array.getSize(); ++i) {
+    //     std::cout << my_array[i] << " ";
+    // }
+    // std::cout << "\n";
+    // my_array.add_end(6);
+
+    // print_arr(my_array);
+
+
+
+
+    std::vector<int> int_vec;
+    std::list<int> int_list;
+    std::set<int> int_set;
+    std::map<int, std::string> int_map;
+
+    // int_map["Mike"] = 55;
+    // int_map["Ivan"] = 5;
+    // int_map["44"] = 15;
+    // int_map["Alex"] = 733;
+    // int_map["Egor"] = 25;
+
+    int_map[1] = "Mike";
+    int_map[0] = "Ivan";
+    int_map[7] = "Alex";
+    int_map[-1] = "Egor";
+    int_map[0] += " Oleg";
+
+
+    //auto str = "str";
+
+    for (auto i = int_map.begin();
+        i != int_map.end();
+        ++i) {
+            std::cout << i->first << " ";
+            std::cout << i->second << "\n";
+        }
 
     return 0;
 }
