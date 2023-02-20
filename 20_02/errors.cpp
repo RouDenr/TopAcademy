@@ -50,6 +50,11 @@ void chose_com(int n) {
     std::cout << "Выберите команду \n";
     std::cout << "1. Все делители \n";
     std::cout << "2. Остаток от деления \n";
+    std::cout << "3. Вывод массива \n";
+    std::cout << "4. Поиск элемена \n";
+    std::cout << "5. Удаление элемента элемена по значению \n";
+    std::cout << "6. Удаление элемента элемена по индексу \n";
+    std::cout << "-1. Выход \n";
     std::cout << " : ";
 
     std::cin >> v;
@@ -68,13 +73,18 @@ void chose_com(int n) {
 }
 
 int main () {
+        int *array;
+        int n = print_n();
+        array = new int[n];
 
     while (true) {
         try {
-                std::cout << "Введите число от 10 до 15";
-                int n = print_n();
-                chose_com(n);
 
+                std::cout << "Введите число от 10 до 15";
+
+                full_arr(array); // заполнение массива // ошибка при неверном размере
+
+                chose_com(n);
 
         } catch (const char* error) {
             std::cout << "Ошибка!!!\n";
@@ -84,5 +94,6 @@ int main () {
 
     }
     std::cout << "End!!\n";
+    delete [] array;
 
 }
